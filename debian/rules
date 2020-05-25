@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+
+include /usr/share/dpkg/pkg-info.mk
+
+%:
+	dh $@ --with dkms
+
+override_dh_install:
+	dh_install Driver/enhanceio/* usr/src/enhanceio-$(DEB_VERSION)/
+	dh_install CLI/eio_cli usr/sbin
+	dh_install CLI/eio_cli.8 usr/share/man/man8
+
+override_dh_dkms:
+	dh_dkms -V $(DEB_VERSION)
+

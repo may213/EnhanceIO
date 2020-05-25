@@ -1,0 +1,22 @@
+PACKAGE_NAME="enhanceio"
+PACKAGE_VERSION="#MODULE_VERSION#"
+AUTOINSTALL="yes"
+
+MAKE="make -C ${kernel_source_dir} KERNEL_TREE=$kernel_source_dir M=${dkms_tree}/${PACKAGE_NAME}/${PACKAGE_VERSION}/build V=1"
+CLEAN="make -C ${kernel_source_dir} KERNEL_TREE=$kernel_source_dir M=${dkms_tree}/${PACKAGE_NAME}/${PACKAGE_VERSION}/build clean"
+LOAD=yes
+
+REMAKE_INITRD="no"
+
+BUILT_MODULE_NAME[0]="enhanceio"
+DEST_MODULE_LOCATION[0]="/extra"
+
+BUILT_MODULE_NAME[1]="enhanceio_fifo"
+DEST_MODULE_LOCATION[1]="/extra"
+
+BUILT_MODULE_NAME[2]="enhanceio_lru"
+DEST_MODULE_LOCATION[2]="/extra"
+
+BUILT_MODULE_NAME[3]="enhanceio_rand"
+DEST_MODULE_LOCATION[3]="/extra"
+

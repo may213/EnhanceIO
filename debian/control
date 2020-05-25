@@ -1,0 +1,21 @@
+Source: enhanceio
+Section: kernel
+Priority: optional
+Maintainer: Alexander Anikin <may@a-star.xyz>
+Build-Depends: debhelper-compat (= 12), dkms
+Homepage: https://github.com/may213/EnhanceIO
+Vcs-Browser: https://github.com/may213/EnhanceIO
+Vcs-Git: https://github.com/may213/EnhanceIO.git
+
+Package: enhanceio-dkms
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: linux-headers-amd64 | linux-headers-686-pae | linux-headers-686 | linux-headers-arm64 | linux-headers-armmp | linux-headers-loongson-3 | linux-headers-marvell | linux-headers-octeon | linux-headers-powerpc64le | linux-headers-s390x | linux-headers
+Suggests: volatility
+Enhances: volatility
+Provides: enhanceio
+Description: kernel module for caching HDD on SSD/NVMe drives
+ EnhanceIO is a Linux kernel module to speed-up HDD iops by caching on SSD/NVMe
+ .
+ Kernel source or headers are required to compile these modules.
+
