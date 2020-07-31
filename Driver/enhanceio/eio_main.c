@@ -2508,7 +2508,12 @@ int eio_map(struct cache_c *dmc, struct request_queue *rq, struct bio *bio)
 
 	/* WB cache will never be in degraded mode. */
 	if (unlikely(CACHE_DEGRADED_IS_SET(dmc))) {
-		EIO_ASSERT(dmc->mode != CACHE_MODE_WB);
+		// EIO_ASSERT(dmc->mode != CACHE_MODE_WB);
+		if (dmc->mode == CACHE_MODE_WB) {
+			pr_err("eio_map: WB cache ssd error, blocking io, need manual intervention.\n");
+			EIO_BIO_ENDIO(bio, -ENODEV);
+			return 0;
+		}
 		force_uncached = 1;
 	} else if (data_dir == WRITE && dmc->mode == CACHE_MODE_RO) {
 		if (to_sector(EIO_BIO_BI_SIZE(bio)) != dmc->block_size)
