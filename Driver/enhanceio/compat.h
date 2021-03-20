@@ -44,6 +44,7 @@
 #endif
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,0,0))
 #define COMPAT_GET_KTIME
+#define COMAT_HAVE_GETIOPRIO
 #endif
 
 /*Include features backported to RedHat kernels*/
@@ -344,4 +345,13 @@ static inline struct block_device *blkdev_get_by_path(const char *path, fmode_t 
 #else
 #define GET_KTIME(time) do_gettimeofday(time)
 #define TIME_STRUCT timeval
+#endif
+
+#ifndef COMAT_HAVE_GETIOPRIO
+static inline int get_current_ioprio(void) {
+	struct io_context *ioc = current->io_context;
+	if (ioc)
+		return ioc->ioprio;
+	return IOPRIO_PRIO_VALUE(IOPRIO_CLASS_NONE, 0);
+}
 #endif
